@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindGroww AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+      background-size: 600% 600%;
+      animation: GradientFlow 20s ease infinite;
+    }
+    @keyframes GradientFlow {
+      0% {background-position: 0% 50%}
+      50% {background-position: 100% 50%}
+      100% {background-position: 0% 50%}
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+  <header class="p-6 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712107.png" alt="MindGrow Logo" class="h-10 w-10" />
+      <h1 class="text-3xl font-bold text-blue-400">MindGroww AI</h1>
+    </div>
+  </header>  <main class="flex flex-col items-center text-center px-6 py-20 max-w-3xl mx-auto">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+      Grow with MindGrow AI<br />
+      <span class="text-blue-400">Unlock your capabilities.</span><br />
+      Unlock your mind's full potential.
+    </h2><p class="text-lg text-gray-300 mb-10">
+  MindGroww AI evolves and levels up alongside you. It adapts to your thinking, your capabilities,
+  and your behavior — becoming smarter as you grow.
+</p>
+
+<form id="emailForm" class="w-full max-w-md">
+  <input
+    type="email"
+    id="emailInput"
+    placeholder="Enter your email"
+    class="w-full p-4 rounded-lg text-gray-900 mb-4"
+    required
+  />
+  <button
+    type="submit"
+    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition-colors"
+  >
+    Get Early Access
+  </button>
+  <p id="message" class="mt-4 text-green-400 hidden">Thank you! You've been signed up.</p>
+</form>
+
+<section class="mt-16">
+  <h3 class="text-2xl font-bold text-blue-400 mb-4">What People Are Saying</h3>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-gray-800 p-4 rounded-xl shadow-md">
+      <p>"MindGrow AI transformed how I learn. It actually feels like it grows with me."</p>
+      <span class="block text-sm text-gray-400 mt-2">– Lara G.</span>
+    </div>
+    <div class="bg-gray-800 p-4 rounded-xl shadow-md">
+      <p>"Finally an AI that evolves with your mind. I'm impressed by the progress tracking."</p>
+      <span class="block text-sm text-gray-400 mt-2">– Ken T.</span>
+    </div>
+  </div>
+</section>
+
+<section class="mt-20 w-full text-left">
+  <h3 class="text-2xl font-bold text-blue-400 mb-4 text-center">Roadmap</h3>
+  <ul class="space-y-3">
+    <li>✅ Beta Launch - Q2 2025</li>
+    <li>🛠️ Voice Model Interaction - Q3 2025</li>
+    <li>📈 Adaptive Learning Graphs - Q4 2025</li>
+    <li>🌍 Global Community Platform - Q1 2026</li>
+  </ul>
+</section>
+
+<section class="mt-20">
+  <h3 class="text-2xl font-bold text-blue-400 mb-4">Try Our Voice Prompt</h3>
+  <button onclick="startVoice()" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-lg">
+    🎤 Start Voice Prompt
+  </button>
+  <p id="voiceOutput" class="mt-4 text-gray-300"></p>
+</section>
+
+  </main>  <footer class="text-center text-gray-500 py-6 text-sm">
+    &copy; 2025 MindGroww AI. All rights reserved.
+  </footer>  <script>
+    const form = document.getElementById("emailForm");
+    const input = document.getElementById("emailInput");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = input.value;
+      if (/^\S+@\S+\.\S+$/.test(email)) {
+        message.classList.remove("hidden");
+        input.value = "";
+      } else {
+        message.textContent = "Please enter a valid email.";
+        message.classList.remove("hidden");
+        message.classList.replace("text-green-400", "text-red-400");
+      }
+    });
+
+    function startVoice() {
+      const output = document.getElementById("voiceOutput");
+      if (!('webkitSpeechRecognition' in window)) {
+        output.textContent = "Voice recognition not supported in this browser.";
+        return;
+      }
+      const recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "en-US";
+
+      recognition.start();
+
+      recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        output.textContent = "You said: " + transcript;
+      };
+
+      recognition.onerror = function (event) {
+        output.textContent = "Error occurred in recognition: " + event.error;
+      };
+    }
+  </script></body>
+</html>
